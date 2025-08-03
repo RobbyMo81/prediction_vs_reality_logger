@@ -8,21 +8,21 @@ This plan outlines the steps to bring the application into full alignment with t
 
 ### A. Forecast Loading
 - [x] JSON loader in `sources.py`
-- [ ] Add schema validation for forecast files (e.g., using `pydantic` or manual checks)
+- [x] Add schema validation for forecast files (e.g., using `pydantic` or manual checks)
 
 ### B. Actuals Fetching
 - [x] Stub/mock exists in tests
-- [ ] Implement `ActualsSource` interface in `sources.py`
-- [ ] Add at least one real data connector (API or file-based)
-- [ ] Make connector pluggable via config/CLI
+- [x] Implement `ActualsSource` interface in `sources.py`
+- [x] Add at least one real data connector (API or file-based)
+- [x] Make connector pluggable via config/CLI
 
 ### C. Accuracy Evaluation
 - [x] Scenario logic in `logger.py`
-- [ ] Expand scenario support (breakout, fade, etc.) with clear, testable rules
+- [x] Expand scenario support (breakout, fade, etc.) with clear, testable rules
 
 ### D. Persistence
 - [x] Results appended to CSV via Pandas
-- [ ] Add schema/versioning to results file for future-proofing
+- [x] Add schema/versioning to results file for future-proofing
 
 ---
 
@@ -43,9 +43,9 @@ This plan outlines the steps to bring the application into full alignment with t
 ## 3. Notifications & Error Handling
 
 ### G. Notifications
-- [ ] Implement Slack alert logic in `notifications.py`
-- [ ] Add retry and secondary fallback (e.g., email or alternate webhook)
-- [ ] Make notification channels configurable
+- [x] Implement Slack alert logic in `notifications.py`
+- [x] Add retry and secondary fallback (e.g., email or alternate webhook)
+- [x] Make notification channels configurable
 
 ---
 
@@ -53,13 +53,13 @@ This plan outlines the steps to bring the application into full alignment with t
 
 ### H. Configuration
 - [x] Centralized `config.yaml` loader
-- [ ] Add full environment variable override support (parse `${VAR:-default}` syntax)
-- [ ] Validate config on startup
+- [x] Add full environment variable override support (parse `${VAR:-default}` syntax)
+- [x] Validate config on startup
 
 ### I. CLI Interface
 - [x] `cli.py` stub exists
-- [ ] Add flags for date, dry-run, verbosity, tensor/actuals options
-- [ ] Add help and usage documentation
+- [x] Add flags for date, dry-run, verbosity, tensor/actuals options
+- [x] Add help and usage documentation
 
 ---
 

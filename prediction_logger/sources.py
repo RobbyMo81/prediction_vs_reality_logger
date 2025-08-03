@@ -18,10 +18,12 @@ class JSONFileForecastSource(ForecastSource):
         self.actuals_source = actuals_source
 
     def load(self, date: datetime) -> dict:
-        # Try the folder path as-is first
+        """
+        Load and validate forecast data for a given date using pydantic schema.
+        Returns the validated forecast dict or raises ValueError/ValidationError.
+        """
         folder_path = self.folder
         if not os.path.isabs(folder_path):
-            # If it's not absolute, try relative to CWD
             folder_path = os.path.abspath(os.path.join(os.getcwd(), self.folder))
 
         filename = os.path.join(folder_path, date.strftime("%Y-%m-%d") + ".json")
@@ -35,12 +37,14 @@ class JSONFileForecastSource(ForecastSource):
             raise FileNotFoundError(f"No forecast found for {date}")
         except json.JSONDecodeError as e:
             raise ValueError(f"Invalid forecast data for {date}: {e}")
-        # Validate schema
+
+        # Validate schema using pydantic
         try:
             forecast = Forecast(**data)
         except ValidationError as e:
             raise ValueError(f"Forecast schema validation failed for {date}: {e}")
-        return data
+        # Optionally, return the validated model as dict
+        return forecast.dict()
 
     def get_actuals(self, date):
         return self.actuals_source.get_actuals(date) if self.actuals_source else None
@@ -59,7 +63,11 @@ class StubActualsSource(ActualsSource):
             'close': 23500
         }
 
+
 class FileActualsSource(ActualsSource):
+    """
+    Loads actuals from a JSON file in a folder, named YYYY-MM-DD.actuals.json.
+    """
     def __init__(self, folder):
         self.folder = folder
 
@@ -73,3 +81,17 @@ class FileActualsSource(ActualsSource):
             raise FileNotFoundError(f"No actuals found for {date}")
         except json.JSONDecodeError as e:
             raise ValueError(f"Invalid actuals data for {date}: {e}")
+
+def get_actuals_source_from_config(cfg):
+    """
+    Factory to create an ActualsSource based on config dict.
+    Supports 'stub' and 'file' types.
+    """
+    typ = cfg.get('actuals_source', 'stub')
+    if typ == 'stub':
+        return StubActualsSource()
+    elif typ == 'file':
+        folder = cfg.get('actuals_folder', './actuals')
+        return FileActualsSource(folder)
+    else:
+        raise ValueError(f"Unknown actuals_source type: {typ}")

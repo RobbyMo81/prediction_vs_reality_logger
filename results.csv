@@ -1,0 +1,2 @@
+date,symbol,predicted,actual,scenario,result,version
+2025-08-02,/NQ,19137.25,19105.75,fade,miss,v1.0

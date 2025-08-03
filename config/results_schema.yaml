@@ -1,0 +1,11 @@
+schema_version: v1.0
+target_symbol: "/NQ"
+fields:
+  - date
+  - symbol
+  - predicted
+  - actual
+  - scenario
+  - result
+  - version
+notes: "Using /NQ adds compatibility with futures-based analytics. Schema can be extended to include tick intervals, session context, or volatility bands."

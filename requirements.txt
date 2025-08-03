@@ -4,3 +4,4 @@ pandas
 python-dateutil
 requests
 websockets
+pydantic>=1.10.0

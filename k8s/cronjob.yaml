@@ -1,17 +1,25 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: prediction-reality-logger
+  name: prediction-logger-cronjob
 spec:
-  schedule: "30 16 * * 1-5"  # Run at 16:30 UTC on weekdays
+  schedule: "0 6 * * *"  # Runs daily at 6am UTC
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: logger
-            image: prediction-reality-logger:latest
-            envFrom:
-            - configMapRef:
-                name: logger-config
+          - name: prediction-logger
+            image: your-docker-repo/prediction-logger:latest
+            imagePullPolicy: Always
+            env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+            # Add other environment variables as needed, e.g.:
+            # - name: LOGGER_CONFIG
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: logger-config
+            #       key: config.yaml
+            command: ["python", "-m", "prediction_logger.cli"]
           restartPolicy: OnFailure

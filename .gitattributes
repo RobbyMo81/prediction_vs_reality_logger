@@ -1,0 +1,20 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# Force LF endings for all source code files
+*.py text eol=lf
+*.sh text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+
+# Keep CRLF for Windows-specific files (if needed)
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+
+# Treat binary files properly
+*.png binary
+*.jpg binary
+*.pdf binary
+*.pt binary

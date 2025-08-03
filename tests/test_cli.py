@@ -1,0 +1,1 @@
+from pathlib import Pathdef test_cli_invocation():    # Placeholder test for CLI    assert True

@@ -1,0 +1,10 @@
+
+        forecast_folder: forecasts
+        output_csv: data/nq_daily_eval.csv
+        schedule_time: 16:30
+        slack_webhook_url: http://example.com/webhook
+        thinkorswim:
+          host: localhost
+          port: 8080
+          use_ssl: false
+        

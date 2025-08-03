@@ -1,0 +1,20 @@
+[project]
+name = "prediction_vs_reality_logger"
+version = "0.1.0"
+description = "A logger for prediction vs reality analysis"
+requires-python = ">=3.8"
+dependencies = [
+    "click",
+    "PyYAML",
+    "pandas",
+    "python-dateutil",
+    "requests",
+    "websockets",
+]
+
+[project.scripts]
+prediction-logger = "prediction_logger.cli:main"
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"

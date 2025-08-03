@@ -1,0 +1,1 @@
+from prediction_logger import versionfrom pathlib import Pathdef test_version():    assert hasattr(version, '__version__')    assert isinstance(version.__version__, str)

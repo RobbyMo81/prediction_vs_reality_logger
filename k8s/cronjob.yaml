@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: prediction-reality-logger
+spec:
+  schedule: "30 16 * * 1-5"  # Run at 16:30 UTC on weekdays
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: logger
+            image: prediction-reality-logger:latest
+            envFrom:
+            - configMapRef:
+                name: logger-config
+          restartPolicy: OnFailure
